@@ -1,0 +1,27 @@
+---
+name: ac4
+
+topology:
+  kinds:
+    ceos:
+      image: ceos:4.32.1F
+  nodes:
+    aus01-rtr1:
+      kind: ceos
+      startup-config: https://raw.githubusercontent.com/marcus-cain/autocon4-design-workshop/refs/heads/main/gc_intended/aus01-rtr1.cfg
+    aus01-rtr2:
+      kind: ceos
+      startup-config: https://raw.githubusercontent.com/marcus-cain/autocon4-design-workshop/refs/heads/main/gc_intended/aus01-rtr2.cfg
+    aus01-sw1:
+      kind: ceos
+      startup-config: https://raw.githubusercontent.com/marcus-cain/autocon4-design-workshop/refs/heads/main/gc_intended/aus01-sw1.cfg
+    aus01-sw2:
+      kind: ceos
+      startup-config: https://raw.githubusercontent.com/marcus-cain/autocon4-design-workshop/refs/heads/main/gc_intended/aus01-sw2.cfg
+  
+  links:
+    - endpoints: ["aus01-sw2:eth2", "aus01-rtr2:eth2"]
+    - endpoints: ["aus01-sw1:eth2", "aus01-rtr2:eth1"]
+    - endpoints: ["aus01-sw1:eth1", "aus01-rtr1:eth1"]
+    - endpoints: ["aus01-sw2:eth1", "aus01-rtr1:eth2"]
+  
